@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- com.mapper.StudentMapper为接口类 -->
+<mapper namespace="com.mapper.StudentMapper">
+	<insert id="save" parameterType="com.po.Student">
+		insert into student(sname,sex,address,birthday,classid)
+		 values(#{sname},#{sex},#{address},#{birthday},#{classid})
+	</insert>
+	<update id="update" parameterType="com.po.Student">
+		update student set sname= #{sname},sex=#{sex},address=#{address},
+				birthday=#{birthday},classid=#{classid}
+		 	where sid=#{sid}
+	</update>
+	<delete id="delById" parameterType="java.lang.Integer">
+		delete from student where sid=#{stuid}
+	</delete>
+	<select id="findById" parameterType="java.lang.Integer" resultType="com.po.Student">
+		select * from student where sid=#{sid}
+	</select>
+	<select id="findAll"  resultType="com.po.Student">
+		select s.*,c.cname from student s,clazz c  where 1=1 and s.classid=c.cid order by sid
+	</select>
+	<select id="findAllClazz"  resultType="com.po.Clazz">
+		select * from clazz where 1=1 order by cid
+	</select>
+
+</mapper>
